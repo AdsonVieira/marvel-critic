@@ -1,19 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthUserController;
+use App\Http\Controllers\UserRatingController;
+
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::post('auth', [AuthUserController::class, 'auth']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('movies', MovieController::class);
+    Route::post('user-rating', [UserRatingController::class, 'rate']);
 });
+
+Route::resource('users', UserController::class);
+
+
