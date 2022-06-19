@@ -7,6 +7,7 @@ use App\Http\Resources\MovieResource;
 use App\Services\MovieService;
 
 use Illuminate\Database\RecordsNotFoundException;
+use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
@@ -17,9 +18,10 @@ class MovieController extends Controller
         $this->movieService = $movieService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return MovieResource::collection($this->movieService->getAll());
+        $user = $request->user();
+        return MovieResource::collection($this->movieService->getAll($user->id));
     }
 
     public function store(MovieRequest $request)

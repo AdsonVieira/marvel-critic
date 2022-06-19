@@ -23,6 +23,7 @@ class UserRatingController extends Controller
         } catch (RecordsNotFoundException $exception) {
             return response()->json(['error' => $exception->getMessage()], 401);
         } catch (\Exception $exception) {
+            dd($exception);
             return response()->json("Houve um erro interno", 500);
         }
     }

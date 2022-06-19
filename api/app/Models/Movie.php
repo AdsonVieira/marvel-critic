@@ -10,4 +10,9 @@ class Movie extends Model
     use HasFactory;
 
     protected $table = 'movies';
+
+    public function userRating()
+    {
+        return $this->hasOne(UserRating::class);
+    }
 }

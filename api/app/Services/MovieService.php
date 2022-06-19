@@ -20,9 +20,9 @@ class MovieService
         return $movie;
     }
 
-    public function getAll()
+    public function getAll(Int $userId)
     {
-        return Movie::simplePaginate(10);
+        return Movie::with('userRating')->paginate(10);
     }
 
     public function store($name, $synopsis, $thumbnailUrl) : Movie

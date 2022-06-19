@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
-    public function store(UserRequest $request)
+    protected function store(UserRequest $request)
     {
         try {
 
@@ -28,6 +29,15 @@ class UserController extends Controller
             );
 
             return response()->json($user, 201);
+        } catch (\Exception $exception) {
+            return response()->json("Houve um erro interno", 500);
+        }
+    }
+
+    protected function me(Request $request)
+    {
+        try {
+            return response()->json($request->user(), 200);
         } catch (\Exception $exception) {
             return response()->json("Houve um erro interno", 500);
         }
