@@ -7,10 +7,21 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
         <b-navbar-nav>
-          <b-nav-item href="#">Minha conta</b-nav-item>
-          <b-nav-item href="#">Sair</b-nav-item>
+          <b-nav-item class="nav-item" to="/movies">Filmes</b-nav-item>
+          <b-nav-item class="nav-item" to="/account">Minha Conta</b-nav-item>
+          <b-nav-item @click="logout">Sair</b-nav-item>
         </b-navbar-nav>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+    },
+  },
+}
+</script>

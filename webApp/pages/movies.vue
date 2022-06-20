@@ -3,15 +3,14 @@
     <Navbar></Navbar>
     <section class="section">
       <div class="container">
-        <h2 class="title">Filmes</h2>
+        <h2 class="title mt-5">Filmes</h2>
         <div class="content">
-
           <div>
             <b-card-group columns>
               <b-card
                 v-for="movie in tableData" :key="movie.id"
                 :title="movie.name"
-                :img-src="movie.thumbnail_url"
+                :img-src="(movie.thumbnail_url !== '') ? movie.thumbnail_url: require(`../static/no-photo.jpg`)"
                 img-alt="Image"
                 img-top
                 tag="article"
@@ -32,7 +31,7 @@
                   :value="getRate(movie)"
                 ></b-form-rating>
                 <template #footer>
-                  <small class="text-muted">Last updated 3 mins ago</small>
+                  <small class="text-muted">Última atualização em {{calcLastUpdate(movie)}}</small>
                 </template>
               </b-card>
             </b-card-group>
@@ -53,9 +52,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Navbar from "../components/Navbar";
-import axios from 'axios';
+
+import Navbar from "../components/Navbar"
 
 export default {
   components: {Navbar},
@@ -90,7 +88,6 @@ export default {
     },
 
     updateCurrentPage(currentPage) {
-      console.log(currentPage)
       this.getMovies(currentPage)
     },
 
@@ -99,10 +96,15 @@ export default {
         movieId: movieId,
         evaluationGrade: value
       })
-        .then(response => {
-          console.log(response);
+      .then(response => {
+        this.$bvToast.toast(`Resultado adicionado ao ranking`, {
+          title: 'Avaliação feita com sucesso',
+          autoHideDelay: 5000,
+          variant: 'success'
         })
-        .catch(function (error) { console.log(error); })
+        console.log(response);
+      })
+      .catch(function (error) { console.log(error); })
     },
 
     getRate(movie) {
@@ -110,6 +112,11 @@ export default {
         return movie.user_rating.evaluation_grade
       }
       return 0
+    },
+
+    calcLastUpdate(movie) {
+      var date = new Date(movie.updated_at);
+      return `${date.getHours()}h${date.getMinutes()}min`
     }
 
   }
