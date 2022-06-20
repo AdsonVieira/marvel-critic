@@ -19,10 +19,14 @@ class UserRatingService
     {
         $movie = $this->movieService->find($movieId);
 
-        $userRating = new UserRating();
+        $userRating = UserRating::where('user_id', $user->id)->where('movie_id', $movieId)->first();
+        if (!$userRating) {
+            $userRating = new UserRating();
+            $userRating->movie_id = $movie->id;
+            $userRating->user_id = $user->id;
+        }
+
         $userRating->evaluation_grade = $evaluationGrade;
-        $userRating->movie_id = $movie->id;
-        $userRating->user_id = $user->id;
 
         return $userRating->save();
     }
