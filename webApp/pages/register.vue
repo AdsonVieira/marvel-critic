@@ -74,35 +74,32 @@ export default {
       email: '',
       name: '',
       password: '',
-      showError: false,
-      errorMsg: ''
+      errorMsg: '',
+      showError: false
     }
   },
 
   methods: {
     async createAccount() {
-      try {
-        this.$axios.post(`users`, {
-          email: this.email,
-          name: this.name,
-          password: this.password
+      let self = this;
+
+      this.$axios.post(`users`, {
+        email: this.email,
+        name: this.name,
+        password: this.password
+      })
+      .then(response => {
+        this.$bvToast.toast(`Faça login para começar a avaliar`, {
+          title: 'Conta criada com sucesso',
+          autoHideDelay: 5000,
+          variant: 'success'
         })
-          .then(response => {
-            this.$bvToast.toast(`Faça login para começar a avaliar`, {
-              title: 'Conta criada com sucesso',
-              autoHideDelay: 5000,
-              variant: 'success'
-            })
-            console.log(response);
-          })
-          .catch(function (error) { console.log(error); })
+      })
+      .catch(function (e) {
+        self.showError = true
+        self.errorMsg = e.response.data.error
+      })
 
-
-      } catch (e) {
-        console.log(e.response.data.error)
-        this.showError = true
-        this.errorMsg = e.response.data.error
-      }
     }
   }
 }
