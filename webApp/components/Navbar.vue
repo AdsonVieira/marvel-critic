@@ -26,6 +26,7 @@
 export default {
   methods: {
     async logout() {
+      this.$axios.post(`logout`).catch(function (error) { console.log(error) })
       await this.$auth.logout();
     },
   },

@@ -78,7 +78,7 @@ class MovieController extends Controller
     public function destroy($id, Request $request)
     {
         try {
-            $this->movieService->   destroy($request->user(), $id);
+            $this->movieService->destroy($request->user(), $id);
         } catch (UnauthorizedException|RecordsNotFoundException $exception) {
             return response()->json(['error' => $exception->getMessage()], 401);
         } catch (\Exception $exception) {

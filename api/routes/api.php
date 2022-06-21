@@ -12,9 +12,11 @@ Route::resource('users', UserController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('me', [UserController::class, 'me']);
+    Route::post('logout', [AuthUserController::class, 'logout']);
 
     Route::resource('movies', MovieController::class);
     Route::post('user-rating', [UserRatingController::class, 'rate']);
+
 });
 
 
