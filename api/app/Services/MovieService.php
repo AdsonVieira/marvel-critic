@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserRating;
 
 use Illuminate\Database\RecordsNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
 
 class MovieService
@@ -23,9 +24,14 @@ class MovieService
         return $movie;
     }
 
-    public function getAll()
+    public function getAll(String $searchByName)
     {
-        return Movie::with('userRating')->paginate(10);
+        $movies =  Movie::with('userRating');
+        if (!empty($searchByName)) {
+            $movies->where('name', 'like', '%'.$searchByName.'%');
+        }
+
+        return $movies->paginate(10);
     }
 
     public function store(User $user, String $name, String $synopsis, String $thumbnailUrl) : Movie

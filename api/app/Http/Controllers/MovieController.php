@@ -21,8 +21,8 @@ class MovieController extends Controller
 
     public function index(Request $request)
     {
-        $user = $request->user();
-        return MovieResource::collection($this->movieService->getAll($user->id));
+        $searchByName = !empty($request->get('name')) ? $request->get('name'): '';
+        return MovieResource::collection($this->movieService->getAll($searchByName));
     }
 
     public function store(MovieRequest $request)
@@ -78,7 +78,7 @@ class MovieController extends Controller
     public function destroy($id, Request $request)
     {
         try {
-            $this->movieService->destroy($request->user(), $id);
+            $this->movieService->   destroy($request->user(), $id);
         } catch (UnauthorizedException|RecordsNotFoundException $exception) {
             return response()->json(['error' => $exception->getMessage()], 401);
         } catch (\Exception $exception) {

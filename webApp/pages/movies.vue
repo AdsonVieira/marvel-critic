@@ -6,12 +6,23 @@
         <h2 class="title mt-5">Filmes</h2>
         <div class="content">
           <div>
-            <p v-if="tableData.length == 0" class="lead text-center">
-              Avalie os principais filmes da Marvel
+            <p v-if="movieList.length == 0" class="lead text-center">
+              Não existem filmes para exibir
             </p>
+            <div class="mb-5">
+              <nav class="navbar navbar-light bg-light">
+                <input
+                  class="form-control mr-sm-2 full-width"
+                  @change="searchMovie"
+                  v-model="searchByName"
+                  type="search" placeholder="Pesquise por filmes, aperte enter para buscar"
+                  aria-label="Search"
+                />
+              </nav>
+            </div>
             <b-card-group columns>
               <b-card
-                v-for="movie in tableData" :key="movie.id"
+                v-for="movie in movieList" :key="movie.id"
                 :title="movie.name"
                 :img-src="(movie.thumbnail_url !== '') ? movie.thumbnail_url: require(`../static/no-photo.jpg`)"
                 img-alt="Image"
@@ -69,11 +80,11 @@ export default {
 
   data() {
     return {
-      tableData: [],
-      fieldsTable: ['id', 'name', 'thumbnail_url', 'rate'],
+      movieList: [],
       currentPage: 1,
       totalRows: 0,
-      perPage: 0
+      perPage: 0,
+      searchByName: ''
     }
   },
 
@@ -85,7 +96,20 @@ export default {
     async getMovies(currentPage) {
       this.$axios.get(`movies?page=${currentPage}`)
         .then(response => {
-          this.tableData = response.data.data
+          this.movieList = response.data.data
+
+          let meta = response.data.meta
+          this.totalRows = meta.total
+          this.perPage = meta.per_page
+
+        })
+        .catch(function (error) { console.log(error) })
+    },
+
+    async searchMovie() {
+      this.$axios.get(`movies?page=1&name=${this.searchByName}`)
+        .then(response => {
+          this.movieList = response.data.data
 
           let meta = response.data.meta
           this.totalRows = meta.total
@@ -96,16 +120,18 @@ export default {
     },
 
     async deleteMovie(id) {
-      this.$axios.delete(`movies/${id}`)
-        .then(response => {
-          this.$bvToast.toast(`Atualizando Feed`, {
-            title: 'Filme deletado com sucesso',
-            autoHideDelay: 5000,
-            variant: 'success'
+      if (window.confirm("Deseja realmente deletar?")) {
+        this.$axios.delete(`movies/${id}`)
+          .then(response => {
+            this.$bvToast.toast(`Atualizando Feed`, {
+              title: 'Filme deletado com sucesso',
+              autoHideDelay: 5000,
+              variant: 'success'
+            })
+            this.getMovies(1)
           })
-          this.getMovies(1)
-        })
-        .catch(function (error) { console.log(error) })
+          .catch(function (error) { console.log(error) })
+      }
     },
 
     updateCurrentPage(currentPage) {
