@@ -6,4 +6,4 @@ Sistema SPA para avaliação de filmes da Marvel
 
 1. [Conceitos iniciais](https://github.com/AdsonVieira/marvel-critic/blob/main/INITALCONCEPT.md).
 2. [Configurando API](https://github.com/AdsonVieira/marvel-critic/tree/main/api#about-laravel).
-3. [Configurando SAP](https://github.com/AdsonVieira/marvel-critic/tree/main/webApp#marvelcritic).
+3. [Configurando SPA](https://github.com/AdsonVieira/marvel-critic/tree/main/webApp#marvelcritic).

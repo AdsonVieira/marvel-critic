@@ -1,4 +1,4 @@
-# Conceitos sobre o projeto
+# Conceitos iniciais
 
 Como foi citado anteriormente, esse projeto foi dividido em duas partes.
 A primeira parte e a API onde concentramos todas as regras de negócio e validações.
