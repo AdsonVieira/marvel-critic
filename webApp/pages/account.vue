@@ -32,7 +32,7 @@
                 disabled
               ></b-form-input>
             </b-form-group>
-            <p>O seu perfil <b>{{this.$auth.user.is_admin == 1 ? 'é de administrador': 'não é de administrador'}}</b></p>
+            <p>O seu perfil <b>{{this.$auth.user.is_admin ? 'é de administrador': 'não é de administrador'}}</b></p>
           </b-card>
         </div>
       </div>
