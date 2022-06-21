@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\Models\Movie;
 
+use App\Models\User;
 use Illuminate\Database\RecordsNotFoundException;
+use Illuminate\Validation\UnauthorizedException;
+use Symfony\Component\CssSelector\Exception\InternalErrorException;
 
 class MovieService
 {
@@ -20,13 +23,15 @@ class MovieService
         return $movie;
     }
 
-    public function getAll(Int $userId)
+    public function getAll()
     {
         return Movie::with('userRating')->paginate(10);
     }
 
-    public function store($name, $synopsis, $thumbnailUrl) : Movie
+    public function store(User $user, String $name, String $synopsis, String $thumbnailUrl) : Movie
     {
+        $this->onlyUserAdminCanExecAction($user);
+
         $movie = new Movie();
         $movie->name = $name;
         $movie->synopsis = $synopsis;
@@ -36,8 +41,10 @@ class MovieService
         return $movie;
     }
 
-    public function update($id, $name, $synopsis, $thumbnailUrl) : Movie
+    public function update(User $user, Int $id, String $name, String $synopsis, String $thumbnailUrl) : Movie
     {
+        $this->onlyUserAdminCanExecAction($user);
+
         $movie = $this->find($id);
 
         $movie->name = $name;
@@ -48,11 +55,20 @@ class MovieService
         return $movie;
     }
 
-    public function destroy($id) : bool
+    public function destroy(User $user, Int $id) : bool
     {
+        $this->onlyUserAdminCanExecAction($user);
+
         $movie = $this->find($id);
 
         return $movie->delete();
+    }
+
+    private function onlyUserAdminCanExecAction(User $user)
+    {
+        if (!$user->is_admin) {
+            throw new UnauthorizedException('O usuário precisa ser admin.');
+        }
     }
 
 }
