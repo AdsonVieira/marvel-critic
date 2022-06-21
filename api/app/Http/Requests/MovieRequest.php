@@ -34,10 +34,10 @@ class MovieRequest extends FormRequest
     }
 
     protected function failedValidation(Validator $validator){
-        $errors = ['errors' => [$validator->errors()]];
+        $error = ['error' => $validator->errors()->first()];
 
         throw new HttpResponseException(
-            response()->json($errors, 400)
+            response()->json($error, 400)
         );
     }
 }
