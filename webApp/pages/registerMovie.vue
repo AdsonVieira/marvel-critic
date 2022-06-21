@@ -83,6 +83,8 @@ export default {
         this.name = ''
         this.synopsis = ''
         this.thumbnailUrl = ''
+        this.errorMsg = ''
+        this.showError = false
         this.$router.push('/registerMovie')
       })
       .catch(function (e) {
