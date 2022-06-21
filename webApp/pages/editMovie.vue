@@ -3,9 +3,9 @@
     <Navbar></Navbar>
     <section class="section">
       <div class="container">
-        <h2 class="title mt-5">Cadastrar Filme</h2>
+        <h2 class="title mt-5">Editar Filme</h2>
         <b-alert :show="this.showError" variant="danger">{{ this.errorMsg }}</b-alert>
-        <form method="post" @submit.prevent="registerMovie">
+        <form method="post" @submit.prevent="updateMovie">
           <div class="content">
             <b-card>
               <b-form-group
@@ -41,7 +41,7 @@
                   required
                 ></b-form-input>
               </b-form-group>
-              <b-button block type="submit" class="mr-3" variant="success">Salvar filme</b-button>
+              <b-button block type="submit" class="mr-3" variant="success">Atualizar filme</b-button>
             </b-card>
           </div>
         </form>
@@ -56,6 +56,7 @@ export default {
 
   data() {
     return {
+      id: '',
       name: '',
       synopsis: '',
       thumbnailUrl: '',
@@ -64,18 +65,24 @@ export default {
     }
   },
 
+  mounted () {
+    if (this.$route.query?.id) {
+      this.getMovie(this.$route.query.id)
+    }
+  },
+
   methods: {
-    async registerMovie() {
+    async updateMovie() {
       let self = this;
 
-      this.$axios.post(`movies`, {
+      this.$axios.put(`movies/${this.id}`, {
         name: this.name,
         synopsis: this.synopsis,
         thumbnail_url: this.thumbnailUrl
       })
       .then(response => {
         this.$bvToast.toast(`Agora é começar a avaliar`, {
-          title: 'Filme cadastrado com sucesso',
+          title: 'Filme atualizado com sucesso',
           autoHideDelay: 5000,
           variant: 'success'
         })
@@ -83,7 +90,25 @@ export default {
         this.name = ''
         this.synopsis = ''
         this.thumbnailUrl = ''
-        this.$router.push('/registerMovie')
+        this.$router.push('/movies')
+      })
+      .catch(function (e) {
+        self.showError = true
+        self.errorMsg = e.response.data.error
+      })
+    },
+
+    async getMovie(id) {
+      let self = this;
+      this.$axios.get(`movies/${id}`)
+      .then(response => {
+        let movieData = response.data
+
+        this.id = movieData.id
+        this.name = movieData.name
+        this.synopsis = movieData.synopsis
+        this.thumbnailUrl = movieData.thumbnail_url
+
       })
       .catch(function (e) {
         self.showError = true

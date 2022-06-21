@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use App\Models\Movie;
-
 use App\Models\User;
+use App\Models\UserRating;
+
 use Illuminate\Database\RecordsNotFoundException;
 use Illuminate\Validation\UnauthorizedException;
-use Symfony\Component\CssSelector\Exception\InternalErrorException;
 
 class MovieService
 {
@@ -60,6 +60,8 @@ class MovieService
         $this->onlyUserAdminCanExecAction($user);
 
         $movie = $this->find($id);
+
+        UserRating::where('movie_id', $movie->id)->delete();
 
         return $movie->delete();
     }
