@@ -17,7 +17,7 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('synopsis');
-            $table->string('thumbnail_url');
+            $table->text('thumbnail_url');
             $table->timestamps();
         });
     }

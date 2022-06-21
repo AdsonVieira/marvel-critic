@@ -18,7 +18,7 @@ class MovieRequest extends FormRequest
         return [
             'name' => 'required',
             'synopsis' => 'required',
-            'thumbnail_url' => 'required|max:255',
+            'thumbnail_url' => 'required',
         ];
 
     }
@@ -29,7 +29,6 @@ class MovieRequest extends FormRequest
             'name.required' => 'O nome do filme deve ser informado.',
             'synopsis.required' => 'O sinopse do filme deve ser informado.',
             'thumbnail_url.required' => 'A url dathumbnail do filme deve ser informada.',
-            'thumbnail_url.max' => 'A url dathumbnail do filme tem o tamanho máximo de 255 caracteres.'
         ];
     }
 
