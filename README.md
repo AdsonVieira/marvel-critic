@@ -8,4 +8,4 @@ Sistema SPA para avaliação de filmes da Marvel
 2. [Configurando API](https://github.com/AdsonVieira/marvel-critic/tree/main/api#about-laravel).
 3. [Configurando SPA](https://github.com/AdsonVieira/marvel-critic/tree/main/webApp#marvelcritic).
 4. [Json com as requisições para a API (Postman)](https://github.com/AdsonVieira/marvel-critic/blob/main/api/Marvel-Critic.postman_collection.json)
-5. [Demonstração do sistema](https://drive.google.com/file/d/17-DpPmoYAM3SwKrDfSgkJdGoSq4so2Gp/view?usp=sharing)
+5. [Demonstração do sistema](https://drive.google.com/file/d/1dRCnJg_WTg9Q51D64j9n0C8s31jUZ6Ba/view?usp=sharing)
