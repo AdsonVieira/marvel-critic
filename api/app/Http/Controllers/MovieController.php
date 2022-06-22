@@ -22,7 +22,9 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $searchByName = !empty($request->get('name')) ? $request->get('name'): '';
-        return MovieResource::collection($this->movieService->getAll($searchByName));
+        return MovieResource::collection(
+            $this->movieService->getAll($searchByName, $request->user())
+        );
     }
 
     public function store(MovieRequest $request)

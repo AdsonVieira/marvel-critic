@@ -24,9 +24,12 @@ class MovieService
         return $movie;
     }
 
-    public function getAll(String $searchByName)
+    public function getAll(String $searchByName, User $user)
     {
-        $movies =  Movie::with('userRating');
+        $movies =  Movie::with(['userRating' => function($q) use ($user) {
+            $q->where('user_id', $user->id);
+        }]);
+
         if (!empty($searchByName)) {
             $movies->where('name', 'like', '%'.$searchByName.'%');
         }
