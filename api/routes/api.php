@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthUserController;
@@ -16,6 +17,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::resource('movies', MovieController::class);
     Route::post('user-rating', [UserRatingController::class, 'rate']);
+    Route::get('metrics', [DashboardController::class, 'metrics']);
 
 });
 

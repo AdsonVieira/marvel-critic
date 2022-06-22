@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\UserRating;
 
 use Illuminate\Database\RecordsNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
 
 class MovieService
