@@ -7,5 +7,5 @@ Sistema SPA para avaliação de filmes da Marvel
 1. [Conceitos iniciais](https://github.com/AdsonVieira/marvel-critic/blob/main/INITALCONCEPT.md).
 2. [Configurando API](https://github.com/AdsonVieira/marvel-critic/tree/main/api#about-laravel).
 3. [Configurando SPA](https://github.com/AdsonVieira/marvel-critic/tree/main/webApp#marvelcritic).
-4. [Json com as requisições para a API (Insomnia)](https://github.com/AdsonVieira/marvel-critic/blob/main/api/api-requests.json)
+4. [Json com as requisições para a API (Postman)](https://github.com/AdsonVieira/marvel-critic/blob/main/api/Marvel-Critic.postman_collection.json)
 5. [Demonstração do sistema](https://drive.google.com/file/d/17-DpPmoYAM3SwKrDfSgkJdGoSq4so2Gp/view?usp=sharing)
