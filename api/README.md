@@ -1,6 +1,6 @@
 # Configurando API
 
-Para configurar a API e conseguir executar em seu amviente local será necessário
+Para configurar a API e conseguir executar em seu ambiente local será necessário
 ter o Mysql instalado junto com Workbench. Eu vou partir do pressuposto que
 você tem esse conhecimento ou já utiliza essas ferramentas.
 
@@ -28,7 +28,7 @@ $ create database marvel_critic;
 
 $ cp .env.example .env
 
-# Abaixo você pode ver o conteudo desse arquivo, é aqui que vamos configurar 
+# Abaixo você pode ver o conteúdo desse arquivo, é aqui que vamos configurar 
 # o acesso ao nosso banco de dados.
 
 APP_NAME="Marvel Critic"
@@ -46,15 +46,14 @@ DB_PASSWORD=root
 ```
 
 ```bash
-# Ainda dentro da pasta marvel-critc/api será necessário instalar as depências
+# Ainda dentro da pasta marvel-critc/api será necessário instalar as dependências
 #do projeto com o compose.
 
 $ composer install
 ```
 
 ```bash
-# Após instalação execute o seguinte comando. Esse comando criará uma nova
-# para sua aplicação (APP_KEY).
+# Após instalação execute o seguinte comando. Esse comando criará uma nova API Key para sua aplicação (APP_KEY).
 
 $ php artisan key:generate
 ```
@@ -66,7 +65,7 @@ $ php artisan config:cache
 ```
 
 ```bash
-# Crie as tabelas necessárias para executar aplicação com sucesso.
+# Crie as tabelas necessárias para executar a aplicação com sucesso.
 
 $ php artisan migrate
 ```
