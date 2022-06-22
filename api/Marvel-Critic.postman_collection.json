@@ -473,6 +473,51 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Dashboard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 23|IZ7uOjS8poiK92q1rNubGpE4ZZG9pteMY6LyqGXw",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"movieId\": 1,\r\n\t\"evaluationGrade\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user-rating",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user-rating"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
