@@ -94,6 +94,9 @@ export default {
           autoHideDelay: 5000,
           variant: 'success'
         })
+        this.email = ''
+        this.name = ''
+        this.password = ''
       })
       .catch(function (e) {
         self.showError = true
